@@ -7,7 +7,8 @@ Install:
 3. Change host and port in /usr/local/share/tarantool/test.lua/config.lua corresponding to your host settings
 
 $ cd ~
-$ run prove
+
+$ prove
 
 Dependencies:
 
