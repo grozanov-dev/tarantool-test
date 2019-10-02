@@ -97,7 +97,8 @@ my @tests = (
 	    Content => JSON::to_json($test->{body})
 	);
 	ok ($res->{_rc} == $assert->{status}, 'Status is OK');
-        ok ($res->{_content} eq $res->{_content}, 'Content is OK') if (exists $assert->{content});
+        ok ($res->{_content} eq $res->{_content}, 'Content is OK')
+	    if (exists $assert->{content});
     }
 }
 

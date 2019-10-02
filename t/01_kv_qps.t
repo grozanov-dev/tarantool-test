@@ -17,8 +17,10 @@ my $key  = 'key_' . ( int rand 1e10 );
 
 {
     my $ua = LWP::UserAgent->new(timeout => 10);
-
-    my $res = $ua->post("http://$host:$port/kv", Content => JSON::to_json({ key => $key, value => '{"id":"qps_1234"}' }));
+    my $res = $ua->post(
+	"http://$host:$port/kv",
+	Content => JSON::to_json( { key => $key, value => '{"id":"qps_1234"}' } )
+    );
 
     ok ($res->{_rc} == 200, 'Status is OK');
 
