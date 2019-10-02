@@ -45,7 +45,7 @@ my @tests = (
 	method => 'get',
 	assert => {
 	    status  => 200,
-	    content => '{\"id\":\"id_1234\"}'
+	    content => '{"id":"id_1234"}'
 	}
     },
 
@@ -53,7 +53,7 @@ my @tests = (
 	url => '/kv/' . $key,
 	method => 'put',
 	body => {
-	    value => '{\"id\":\"id_4321\"}'
+	    value => '{"id":"id_4321"}'
 	},
 	assert => {
 	    status  => 200,
