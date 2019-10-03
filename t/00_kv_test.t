@@ -3,7 +3,7 @@ use 5.026;
 use strict;
 use warnings;
 
-use Test::More 'tests' => 9;
+use Test::More 'tests' => 11;
 use LWP::UserAgent qw//;
 use JSON;
 
@@ -81,7 +81,23 @@ my @tests = (
 	url => '/kv/' . $key,
 	method => 'get',
 	assert => {
-	    status  => 204,
+	    status  => 404,
+	}
+    },
+
+    {
+	url => '/kv/' . $key,
+	method => 'put',
+	assert => {
+	    status  => 404,
+	}
+    },
+
+    {
+	url => '/kv/' . $key,
+	method => 'delete',
+	assert => {
+	    status  => 404,
 	}
     },
 );
@@ -97,8 +113,7 @@ my @tests = (
 	    Content => JSON::to_json($test->{body})
 	);
 	ok ($res->{_rc} == $assert->{status}, 'Status is OK');
-        ok ($res->{_content} eq $res->{_content}, 'Content is OK')
-	    if (exists $assert->{content});
+        ok ($res->{_content} eq $res->{_content}, 'Content is OK') if (exists $assert->{content});
     }
 }
 

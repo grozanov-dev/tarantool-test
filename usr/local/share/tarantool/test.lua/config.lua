@@ -31,7 +31,7 @@ return {
                 { name = '_ts', type = 'number' },
             },
             tuples_per_iteration = 50,
-            max_requests_per_ttl = 10,
+            max_requests_per_ttl = 20,
             sleep = 1,
             ttl = 1,
             key = 'test_key', -- В перспективе возможно усложнить индекс, сделав fcap для конкретного IPшника
@@ -39,7 +39,6 @@ return {
     },
     status = {
         OK                = 200,
-        NO_CONTENT        = 204,
         BAD_REQUEST       = 400,
         NOT_FOUND         = 404,
         CONFLICT          = 409,

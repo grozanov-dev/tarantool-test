@@ -71,29 +71,41 @@ return {
 
     get = function(self)
             if frequency_cap(self) then return create_response(status.TOO_MANY_REQUESTS) end
+
             local id = self:stash('id')
             local data = _get(id)
-            if data then
-                return create_response(status.OK, data)
-            end
-            return create_response(status.NO_CONTENT)
+
+            if data then return create_response(status.OK, data) end
+
+            return create_response(status.NOT_FOUND)
         end,
 
     put = function(self)
             if frequency_cap(self) then return create_response(status.TOO_MANY_REQUESTS) end
+
             local key = self:stash('id')
+
+            if not _get(key) then return create_response(status.NOT_FOUND) end
+
             local data = parse_request(self)
+
             if data then
                 _put(key, data.value)
                 return create_response(status.OK)
             end
+
             return create_response(status.BAD_REQUEST)
         end,
 
     del = function(self)
             if frequency_cap(self) then return create_response(status.TOO_MANY_REQUESTS) end
+
             local key = self:stash('id')
+
+            if not _get(key) then return create_response(status.NOT_FOUND) end
+
             _del(key)
+
             return create_response(status.OK)
         end
 }
